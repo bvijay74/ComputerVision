@@ -18,17 +18,17 @@ struct HomeView: View {
             VStack {
                 Spacer()
                 
-                if !context.detectedText.isEmpty {
-                    ZStack {
-                        VStack {
-                            Text(context.detectedText)
-                                .font(.system(size: 15, weight: .medium))
-                                .foregroundColor(.white)
-                                .multilineTextAlignment(.center)
-                                .padding(.all, 10)
-                            HStack {
-                                Spacer()
-                                Button(action: { 
+                ZStack {
+                    VStack {
+                        Text(context.detectedText)
+                            .font(.system(size: 15, weight: .medium))
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .padding(.all, 10)
+                        HStack {
+                            Spacer()
+                            if !context.detectedText.isEmpty {
+                                Button(action: {
                                     UIPasteboard.general.string = context.detectedText
                                 } ) {
                                     ZStack {
@@ -39,18 +39,18 @@ struct HomeView: View {
                                     }
                                 }.padding(.all, 20)
                             }
-                        }.background {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(.gray.opacity(0.75), lineWidth: 0.5)
-                                RoundedRectangle(cornerRadius: 20)
-                                    .fill(.gray.opacity(0.1))
-                            }
+                        }.frame(minHeight: 100)
+                    }.background {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.gray.opacity(0.75), lineWidth: 0.5)
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.gray.opacity(0.1))
                         }
-                        
-                        Spacer()
-                    }.padding(.all, 10)
-                }
+                    }
+                    
+                    Spacer()
+                }.padding(.all, 10)
                 
                 Button(action: { context.activeView = .Camera } ) {
                     ZStack {
